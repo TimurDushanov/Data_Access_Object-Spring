@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class Repository {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private String scriptSelectFileName = "select_product_name.sql";
-    String script = read(scriptSelectFileName);
+    private String script = read(scriptSelectFileName);
 
     public Repository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
