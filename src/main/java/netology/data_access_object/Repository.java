@@ -1,7 +1,6 @@
 package netology.data_access_object;
 
 
-import lombok.AllArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -18,13 +17,15 @@ public class Repository {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private String scriptSelectFileName = "select_product_name.sql";
     String script = read(scriptSelectFileName);
+
     public Repository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    protected List<String> getProductName(String name){
+    protected List<String> getProductName(String name) {
         return namedParameterJdbcTemplate.queryForList(script, Map.of("name", name), String.class);
     }
+
     private static String read(String scriptFileName) {
         try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
