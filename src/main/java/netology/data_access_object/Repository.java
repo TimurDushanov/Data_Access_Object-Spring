@@ -21,11 +21,11 @@ public class Repository {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    private String scriptSelect = "select_product_name.sql";
+    private String scriptSelectFileName = "select_product_name.sql";
 
     protected List<String> getProductName(String name){
-        String scriptFileName = read(scriptSelect);
-        return namedParameterJdbcTemplate.queryForList(scriptFileName, Map.of("name", name), String.class);
+        String script = read(scriptSelectFileName);
+        return namedParameterJdbcTemplate.queryForList(script, Map.of("name", name), String.class);
     }
     private static String read(String scriptFileName) {
         try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
