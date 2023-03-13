@@ -16,15 +16,13 @@ import java.util.stream.Collectors;
 @org.springframework.stereotype.Repository
 public class Repository {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
+    private String scriptSelectFileName = "select_product_name.sql";
+    String script = read(scriptSelectFileName);
     public Repository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    private String scriptSelectFileName = "select_product_name.sql";
-
     protected List<String> getProductName(String name){
-        String script = read(scriptSelectFileName);
         return namedParameterJdbcTemplate.queryForList(script, Map.of("name", name), String.class);
     }
     private static String read(String scriptFileName) {
